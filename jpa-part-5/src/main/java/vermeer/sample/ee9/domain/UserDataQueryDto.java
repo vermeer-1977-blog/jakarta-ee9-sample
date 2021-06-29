@@ -10,8 +10,13 @@ public class UserDataQueryDto {
         this.nickName = nickName;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getFirstName() {
+        return this.userName.split(" ")[0];
+    }
+
+    public String getLastName() {
+        var _names = this.userName.split(" ");
+        return 2 <= _names.length ? _names[1] : "";
     }
 
     public String getNickName() {
