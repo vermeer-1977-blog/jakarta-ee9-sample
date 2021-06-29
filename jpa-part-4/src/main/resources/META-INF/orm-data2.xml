@@ -8,6 +8,7 @@
     <named-native-query name="UserDataQuery.data2" result-set-mapping="UserDataQueryDto">
         <query>
 <![CDATA[
+/* UserDataQuery.data2 */
 select userName, nickName from UserData where id = 2;
 ]]>
         </query>
