@@ -21,7 +21,7 @@ public class UserDataQueryImpl implements UserDataQuery {
 
     @Override
     public List<UserDataQueryDto> getUserData() {
-        var results = em.createNamedQuery("UserDataQueryDto", UserDataQueryDto.class).getResultList();
+        var results = em.createNamedQuery("UserDataQuery", UserDataQueryDto.class).getResultList();
         return results;
     }
 

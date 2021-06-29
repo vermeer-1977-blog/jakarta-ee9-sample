@@ -16,7 +16,7 @@ public class UserDataQueryImpl implements UserDataQuery {
 
     @Override
     public List<User> getUserData() {
-        List<UserDataQueryDto> results = em.createNativeQuery("select userName, nickName from UserData", "UserDataQueryDto").getResultList();
+        List<UserDataQueryDto> results = em.createNativeQuery("select userName, nickName from UserData", "UserDataQuery").getResultList();
         var users = results.stream().map((result) -> {
             var user = result.toUser();
             return user;

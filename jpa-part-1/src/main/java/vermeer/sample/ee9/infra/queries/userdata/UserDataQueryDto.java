@@ -32,7 +32,7 @@ public class UserDataQueryDto {
      * <code>@Entity</code> class must set <code>@Id</code> property. <br>
      * (Id field is not needed for DTOs.)
      */
-    @SqlResultSetMapping(name = "UserDataQueryDto",
+    @SqlResultSetMapping(name = "UserDataQuery",
             classes = {
                 @ConstructorResult(
                         targetClass = UserDataQueryDto.class,

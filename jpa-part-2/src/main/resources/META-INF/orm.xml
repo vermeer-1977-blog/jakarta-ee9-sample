@@ -5,7 +5,7 @@
     xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm_2_2.xsd"
     version="2.2">
 
-    <named-native-query name="UserDataQueryDto" result-set-mapping="UserDataQueryDto">
+    <named-native-query name="UserDataQuery" result-set-mapping="UserDataQueryDto">
         <query>
 <![CDATA[
 select userName, nickName from UserData;
