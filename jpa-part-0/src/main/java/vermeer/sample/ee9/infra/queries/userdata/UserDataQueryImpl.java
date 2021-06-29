@@ -2,7 +2,6 @@ package vermeer.sample.ee9.infra.queries.userdata;
 
 import vermeer.sample.ee9.domain.UserDataQuery;
 import jakarta.enterprise.context.RequestScoped;
-import jakarta.inject.Named;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import java.util.List;
@@ -11,7 +10,6 @@ import vermeer.sample.ee9.domain.User;
 import vermeer.sample.ee9.domain.UserName;
 import vermeer.sample.ee9.infra.entities.UserData;
 
-@Named
 @RequestScoped
 public class UserDataQueryImpl implements UserDataQuery {
 
