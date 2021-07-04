@@ -19,8 +19,7 @@ public class UserDataQueryImplTest {
         JpaTestExtension.em.persist(userData);
         tx.commit();
 
-        var query = new UserDataQueryImpl();
-        query.em = JpaTestExtension.em;
+        var query = new UserDataQueryImpl(JpaTestExtension.em);
         var results = query.getUserData();
 
         assertEquals(1, results.size());
