@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>vermeer.sample.ee9</groupId>
-    <artifactId>parent</artifactId>
+    <artifactId>parent.sample.ee9</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
@@ -16,5 +16,6 @@
         <module>jpa-part-3</module>
         <module>jpa-part-4</module>
         <module>jpa-part-5</module>
+        <module>jpa-part-6-junit5</module>
     </modules>
 </project>

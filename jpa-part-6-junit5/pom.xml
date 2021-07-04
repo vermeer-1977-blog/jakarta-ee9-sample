@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>vermeer.sample.ee9</groupId>
+    <artifactId>jpa-part-6-junit5</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>war</packaging>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.target>11</maven.compiler.target>
+        <maven.compiler.source>11</maven.compiler.source>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.junit</groupId>
+                <artifactId>junit-bom</artifactId>
+                <version>5.7.2</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <dependency>
+            <groupId>jakarta.platform</groupId>
+            <artifactId>jakarta.jakartaee-api</artifactId>
+            <version>8.0.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>1.4.200</version>
+            <!--            
+            <scope>runtime</scope>
+            <optional>true</optional>
+            -->
+        </dependency>
+
+        <!-- test -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <scope>test</scope>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.eclipse.persistence</groupId>
+            <artifactId>eclipselink</artifactId>
+            <version>2.7.7</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- test -->
+
+    </dependencies>
+
+
+    <build>
+            
+        <!-- for unitTest-->
+        <testResources>
+            <testResource>
+                <directory>src/test/resources</directory>
+                <filtering>true</filtering>
+            </testResource>
+        </testResources>
+        
+        <plugins>
+        
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                    <compilerArgument>-proc:none</compilerArgument>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.0.0-M5</version>
+                <!--
+                <configuration>
+                    <testFailureIgnore>true</testFailureIgnore>
+                    <includes>
+                        <include>**/*Test.java</include>
+                    </includes>
+                </configuration>
+                -->
+            </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.cargo</groupId>
+                <artifactId>cargo-maven3-plugin</artifactId>
+                <version>1.9.4</version>
+                <configuration>
+                    <configuration>
+                        <datasources>
+                            <datasource>
+                                <jndiName>jdbc/DemoDS</jndiName>
+                                <driverClass>org.h2.Driver</driverClass>
+                                <url>jdbc:h2:mem:demo;DB_CLOSE_DELAY=-1</url>
+                                <username>demouser</username>
+                                <password>demosecret</password>
+                            </datasource>
+                        </datasources>
+                    </configuration>
+                    <container>
+                        <dependencies>
+                            <dependency>
+                                <groupId>com.h2database</groupId>
+                                <artifactId>h2</artifactId>
+                            </dependency>
+                        </dependencies>
+                        <systemProperties>
+                            <javax.persistence.schema-generation.database.action>create</javax.persistence.schema-generation.database.action>
+                            <javax.persistence.schema-generation.scripts.action>create</javax.persistence.schema-generation.scripts.action>
+                            <javax.persistence.schema-generation.scripts.create-target>${project.basedir}/target/create.sql</javax.persistence.schema-generation.scripts.create-target>
+                            <javax.persistence.sql-load-script-source>META-INF/tmp/initializer.sql</javax.persistence.sql-load-script-source>
+                            <eclipselink.logging.level>FINE</eclipselink.logging.level>
+                        </systemProperties>
+                    </container>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <profiles>
+        <profile>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <id>payara</id>
+            <properties>
+                <cargo.maven.containerId>payara</cargo.maven.containerId>
+                <cargo.maven.containerUrl>https://repo.maven.apache.org/maven2/fish/payara/distributions/payara/5.2021.4/payara-5.2021.4.zip</cargo.maven.containerUrl>
+            </properties>
+        </profile>
+    </profiles>
+</project>
